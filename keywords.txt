@@ -7,3 +7,5 @@ Intensity	KEYWORD2
 Clear	KEYWORD2
 Refresh	KEYWORD2
 print7Seg	KEYWORD2
+printMatrix	KEYWORD2
+Invert	KEYWORD2
