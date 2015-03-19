@@ -1,16 +1,15 @@
-/* FILE:    HCMODU0082_Serial_7_Segment_Module_Example1
+/* FILE:    HCMODU0082_Serial_Dot_Matrix_Example
    DATE:    19/03/15
-   VERSION: 0.2
+   VERSION: 0.1
    
 REVISIONS:
 
-12/03/15 Created version 0.1
-19/03/15 Updated to work with V0.2 of the HCMAX7219 library
+19/03/15 Created version 0.1
 
-This is an example of how to use the Hobby Components serial 8 digit seven 7 
-segment display module (HCMODU0082). To use this example sketch you will 
-need to download and install the HCMAX7921 library available from the software
-section of our support forum (forum.hobbycomponents.com) or on github:
+This is an example of how to use the Hobby Components 8x8 serial dot matrix
+module (HCOPTO0014). To use this example sketch you will need to download 
+and install the HCMAX7921 library available from the software section of our
+support forum (forum.hobbycomponents.com) or on github:
 (https://github.com/HobbyComponents)
 
 The library assumes you are using one module. If you have more than one module
@@ -18,7 +17,6 @@ connected together then you will need to change the following line in the
 libraries HCMAX7219.h header file to the number of drivers you have connected:
 
 #define NUMBEROFDRIVERS 1 <- Change this number
-
 
 PINOUT:
 
@@ -53,19 +51,65 @@ HCMAX7219 HCMAX7219(LOAD);
 
 
 void setup() 
-{        
+{       
 }
+
 
 /* Main program */
 void loop() 
 {
+  byte Loopcounter;
+  int Position;
+
   /* Clear the output buffer */
   HCMAX7219.Clear();
-  /* Write some text to the output buffer */
-  HCMAX7219.print7Seg("HELLO !!",8);
-  /* Send the output buffer to the display */
-  HCMAX7219.Refresh();  
   
-  while(1);
-
+  /* SCROLL SOME TEXT 2 TIMES BEFORE MOVING ON */
+  for (Loopcounter = 0; Loopcounter <= 2; Loopcounter++)
+  {
+    for(Position=0; Position <= 64; Position++)
+    {
+      HCMAX7219.printMatrix("HELLO!! ", Position);
+      HCMAX7219.Refresh();
+      delay(80);
+    }
+  }
+  
+  
+  /* SCROLL SOME INVERTED TEXT 2 TIMES BEFORE MOVING ON */
+  HCMAX7219.Invert(INVERTON);
+  for (Loopcounter = 0; Loopcounter <= 2; Loopcounter++)
+  {
+    for(Position=0; Position <= 64; Position++)
+    {
+      HCMAX7219.Clear();
+      HCMAX7219.printMatrix("HELLO!! ", Position);
+      HCMAX7219.Refresh();
+      delay(80);
+    }
+  }
+  HCMAX7219.Invert(INVERTOFF);
+  
+  
+  
+  /* SCROLL AND INTEGER NUMBER */
+  for(Position=0; Position <= 80; Position++)
+  {
+    HCMAX7219.Clear();
+    HCMAX7219.printMatrix(-12345678, Position);
+    HCMAX7219.Refresh();
+    delay(80);
+  }
+  
+  
+  
+  /* SCROLL AND INTEGER NUMBER WITH DECIMAL PLACE */
+  for(Position=0; Position <= 96; Position++)
+  {
+    HCMAX7219.Clear();
+    HCMAX7219.printMatrix(-12345678, 2, Position);
+    HCMAX7219.Refresh();
+    delay(80);
+  }
+  
 }

@@ -1,10 +1,11 @@
 /* FILE:    HCMODU0082_Serial_7_Segment_Module_Example2
-   DATE:    14/03/15
-   VERSION: 0.1
+   DATE:    19/03/15
+   VERSION: 0.2
    
 REVISIONS:
 
 12/03/15 Created version 0.1
+19/03/15 Updated to work with V0.2 of the HCMAX7219 library
 
 This is an example of how to use the Hobby Components serial 8 digit seven 7 
 segment display module (HCMODU0082). To use this example sketch you will 
@@ -21,12 +22,12 @@ libraries HCMAX7219.h header file to the number of drivers you have connected:
 
 PINOUT:
 
-MODULE.....ARDUINO
-VCC........+5V
-GND........GND
-DIN........12
-CS (LOAD)..10
-CLK........11
+MODULE.....UNO/NANO.....MEGA
+VCC........+5V..........+5V
+GND........GND..........GND
+DIN........11...........51
+CS (LOAD)..10...........10
+CLK........13...........52
 
 You may copy, alter and reuse this code in any way you like, but please leave
 reference to HobbyComponents.com in your comments if you redistribute this code.
@@ -40,16 +41,15 @@ LACK OF NEGLIGENCE. HOBBY COMPONENTS SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE
 FOR ANY DAMAGES INCLUDING, BUT NOT LIMITED TO, SPECIAL, INCIDENTAL OR 
 CONSEQUENTIAL DAMAGES FOR ANY REASON WHATSOEVER. */
 
-/* Include the HCMAX7219 library */
+/* Include the HCMAX7219 and SPI library */
 #include <HCMAX7219.h>
+#include "SPI.h"
 
-/* Digital pins used for driving the module */
-#define DIN 12
-#define CLK 11
+/* Set the LOAD (CS) digital pin number*/
 #define LOAD 10
  
 /* Create an instance of the library */
-HCMAX7219 HCMAX7219(DIN, CLK, LOAD);
+HCMAX7219 HCMAX7219(LOAD);
 
 
 void setup() 
