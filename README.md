@@ -10,7 +10,7 @@ This Arduino library is written to work with the MAX7219 LED driver IC. The libr
 The library also currently supports our 8 digit 7 segment display module (HCMODU0082):
 http://hobbycomponents.com/displays/597-max7219-8-digit-seven-segment-display-module
 
-...and our 8x8 serial dot matrix display module (HCOPTO0014:
+...and our 8x8 serial dot matrix display module (HCOPTO0014):
 http://hobbycomponents.com/opto-electronics/190-max7219-serial-dot-matrix-display-module
 
 The library provides compatible commands and an alphanumeric character set for these types of modules. Future updates are planned to include other MAX7219 based products.
